@@ -1,0 +1,29 @@
+﻿<!--
+    Resources Used:
+    https://stackoverflow.com/questions/9844050/line-breaks-in-textarea-used-in-a-mvc-c-sharp-website-app
+    https://getbootstrap.com/docs/4.3/components/forms/
+    https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app
+ -->
+@model MyOrgs.Models.Announcement
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>@Html.DisplayFor(model => model.Headline)</h1>
+<!--<h1>Details</h1>-->
+
+<div>
+    <h4>by @Html.DisplayFor(Model => Model.Author)</h4>
+    <hr />
+    <div class="text-body" style="white-space: pre-line">
+        @Html.DisplayFor(Model => Model.post)
+
+
+    </div>
+    <p>Published: @Html.DisplayFor(Model => Model.publishDate)</p>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.AnnouncementID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

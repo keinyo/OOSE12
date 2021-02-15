@@ -1,0 +1,59 @@
+﻿<!--
+ Resources used: https://getbootstrap.com/docs/4.3/components/forms/
+                 https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app
+ -->
+
+@model IEnumerable<MyOrgs.Models.Announcement>
+
+@{
+    ViewData["Title"] = "Announcements";
+}
+
+<h1>Announcements</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Headline)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.publishDate)
+            </th>
+            <!--<th>
+                @Html.DisplayNameFor(model => model.post)
+            </th>-->
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.AnnouncementID">@Html.DisplayFor(modelItem => item.Headline)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.publishDate)
+                </td>
+                <!--<td>
+                    @Html.DisplayFor(modelItem => item.post)
+                </td>-->
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.AnnouncementID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.AnnouncementID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.AnnouncementID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

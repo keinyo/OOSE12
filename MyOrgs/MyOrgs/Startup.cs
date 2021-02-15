@@ -1,3 +1,8 @@
+/*
+ * Resources used: 
+ * https://github.com/aspnet/Announcements/issues/432
+ * https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app
+*/
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +39,10 @@ namespace MyOrgs
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+
+            services.AddDbContext<AnnouncementContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("AnnouncementContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,7 +51,6 @@ namespace MyOrgs
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
             }
             else
             {
