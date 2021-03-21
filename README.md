@@ -5,10 +5,8 @@ Team project for CSE3311 at UTA
 Use Visual Studio 2019  
 Open Package Manager Console (can find from the search bar)  
 enter the following commands:  
-add-migration initalMigration -Context AnnouncementContext  
-add-migration loginCreate -Context ApplicationDbContext  
-update-database -context ApplicationDbContext 
-update-database -context AnnouncementContext 
+Add-Migration initalMigration 
+Update-Database
 ## List of all external resources used  
 https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app  
 https://getbootstrap.com/docs/4.3/components/forms/  
