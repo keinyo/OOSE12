@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-
+using MyOrgs.Models;
 namespace MyOrgs.Data
 {
     public class ApplicationDbContext : IdentityDbContext
@@ -12,5 +12,7 @@ namespace MyOrgs.Data
             : base(options)
         {
         }
+
+        public DbSet<Announcement> Announcement { get; set; }
     }
 }

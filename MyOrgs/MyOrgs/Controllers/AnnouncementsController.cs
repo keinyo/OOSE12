@@ -12,9 +12,9 @@ namespace MyOrgs.Controllers
 {
     public class AnnouncementsController : Controller
     {
-        private readonly AnnouncementContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public AnnouncementsController(AnnouncementContext context)
+        public AnnouncementsController(ApplicationDbContext context)
         {
             _context = context;
         }

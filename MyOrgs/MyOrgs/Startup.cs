@@ -41,8 +41,8 @@ namespace MyOrgs
             services.AddRazorPages();
 
 
-            services.AddDbContext<AnnouncementContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("AnnouncementContext")));
+//            services.AddDbContext<AnnouncementContext>(options =>
+//                options.UseSqlServer(Configuration.GetConnectionString("AnnouncementContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

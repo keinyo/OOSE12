@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace MyOrgs.Migrations
+namespace MyOrgs.Data.Migrations
 {
-    public partial class AnnouncementCreate : Migration
+    public partial class mergeAppAndAnnouncement : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,10 +13,10 @@ namespace MyOrgs.Migrations
                 {
                     AnnouncementID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Headline = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Author = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Headline = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Author = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     publishDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    post = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    post = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
