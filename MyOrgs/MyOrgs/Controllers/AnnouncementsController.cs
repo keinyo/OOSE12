@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MyOrgs.Data;
 using MyOrgs.Models;
+
+//Sources used for Authorization:
+//https://docs.microsoft.com/en-us/aspnet/mvc/overview/security/create-an-aspnet-mvc-5-web-app-with-email-confirmation-and-password-reset
 
 namespace MyOrgs.Controllers
 {
@@ -20,11 +24,12 @@ namespace MyOrgs.Controllers
         }
 
         // GET: Announcements
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Announcement.ToListAsync());
         }
-
+        [Authorize]
         // GET: Announcements/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -42,8 +47,8 @@ namespace MyOrgs.Controllers
 
             return View(announcement);
         }
-
         // GET: Announcements/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -54,6 +59,7 @@ namespace MyOrgs.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("AnnouncementID,Headline,Author,publishDate,post")] Announcement announcement)
         {
             if (ModelState.IsValid)
@@ -66,6 +72,7 @@ namespace MyOrgs.Controllers
         }
 
         // GET: Announcements/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,6 +93,7 @@ namespace MyOrgs.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("AnnouncementID,Headline,Author,publishDate,post")] Announcement announcement)
         {
             if (id != announcement.AnnouncementID)
@@ -117,6 +125,7 @@ namespace MyOrgs.Controllers
         }
 
         // GET: Announcements/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -137,6 +146,7 @@ namespace MyOrgs.Controllers
         // POST: Announcements/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var announcement = await _context.Announcement.FindAsync(id);
