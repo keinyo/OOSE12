@@ -14,5 +14,6 @@ namespace MyOrgs.Data
         }
 
         public DbSet<Announcement> Announcement { get; set; }
+        public DbSet<Organization> Organization { get; set; }
     }
 }

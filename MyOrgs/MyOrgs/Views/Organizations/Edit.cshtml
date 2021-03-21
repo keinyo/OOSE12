@@ -1,0 +1,39 @@
+﻿@model MyOrgs.Models.Organization
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Organization</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="OrgID" />
+            <div class="form-group">
+                <label asp-for="orgName" class="control-label"></label>
+                <input asp-for="orgName" class="form-control" />
+                <span asp-validation-for="orgName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="orgDesc" class="control-label"></label>
+                <input asp-for="orgDesc" class="form-control" />
+                <span asp-validation-for="orgDesc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

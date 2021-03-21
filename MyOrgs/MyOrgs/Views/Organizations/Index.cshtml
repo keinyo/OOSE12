@@ -1,0 +1,42 @@
+﻿@model IEnumerable<MyOrgs.Models.Organization>
+
+@{
+    ViewData["Title"] = "Manage Organizations";
+}
+
+<h1>Organization List</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.orgName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.orgDesc)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.orgName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.orgDesc)
+            </td>
+            <td>
+                <!--These should replace with a single option that will
+                    be either Join or Leave if the user is in the user
+                    is part of the organization. The table to hold user
+                    memberships also needs to be created.-->
+                <a asp-action="" asp-route-id="@item.OrgID">Join</a> |
+                <a asp-action="" asp-route-id="@item.OrgID">Leave</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
