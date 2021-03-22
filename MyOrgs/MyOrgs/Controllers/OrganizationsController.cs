@@ -126,6 +126,7 @@ namespace MyOrgs.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            
             return View(organization);
         }
 
@@ -148,6 +149,8 @@ namespace MyOrgs.Controllers
             return View(organization);
         }
 
+    
+
         // POST: Organizations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -158,6 +161,40 @@ namespace MyOrgs.Controllers
             _context.Organization.Remove(organization);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        // GET: Organizatoins/Join
+        [Authorize]
+        public async Task<IActionResult> Join(int? id)
+        {
+            ViewBag.OrgID = id;
+            if(id==null)
+            {
+                return NotFound();
+            }
+
+            var organization = await _context.Organization
+                .FirstOrDefaultAsync(m => m.OrgID == id);
+            if (organization == null)
+            {
+                return NotFound();
+            }
+            return View();
+        }
+
+        // POST: Organizations/Join/5
+        [HttpPost, ActionName("Join")]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> Join(int id, [Bind("Org,User,isManager")] OrgMembership orgMembership)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(orgMembership);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(orgMembership);
         }
 
         private bool OrganizationExists(int id)

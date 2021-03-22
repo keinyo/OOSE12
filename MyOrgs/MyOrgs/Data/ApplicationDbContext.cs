@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MyOrgs.Models;
+//Sources: https://docs.microsoft.com/en-us/ef/core/modeling/keys?tabs=data-annotations
 namespace MyOrgs.Data
 {
     public class ApplicationDbContext : IdentityDbContext
@@ -15,5 +16,14 @@ namespace MyOrgs.Data
 
         public DbSet<Announcement> Announcement { get; set; }
         public DbSet<Organization> Organization { get; set; }
+        public DbSet<OrgMembership> OrgMembership { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelbuilder)
+        {
+            base.OnModelCreating(modelbuilder);
+            modelbuilder.Entity<OrgMembership>()
+                .HasKey(o => new { o.Org, o.User });
+        }
     }
+
 }

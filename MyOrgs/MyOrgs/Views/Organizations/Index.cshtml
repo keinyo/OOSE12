@@ -33,8 +33,8 @@
                     be either Join or Leave if the user is in the user
                     is part of the organization. The table to hold user
                     memberships also needs to be created.-->
-                <a asp-action="" asp-route-id="@item.OrgID">Join</a> |
-                <a asp-action="" asp-route-id="@item.OrgID">Leave</a>
+                <a asp-action="Join" asp-route-id="@item.OrgID">Join</a> |
+                <a asp-action="Leave" asp-route-id="@item.OrgID">Leave</a>
             </td>
         </tr>
 }
