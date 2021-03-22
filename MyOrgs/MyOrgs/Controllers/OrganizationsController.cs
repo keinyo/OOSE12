@@ -186,7 +186,7 @@ namespace MyOrgs.Controllers
         [HttpPost, ActionName("Join")]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Join(int id, [Bind("Org,User,isManager")] OrgMembership orgMembership)
+        public async Task<IActionResult> Join([Bind("Org,User")] OrgMembership orgMembership)
         {
             if (ModelState.IsValid)
             {

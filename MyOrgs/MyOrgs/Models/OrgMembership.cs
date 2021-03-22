@@ -12,12 +12,13 @@ namespace MyOrgs.Models
     public class OrgMembership
     {
         [Required]
-        public int Org;
+        public int Org { get; set; }
         [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string User;
-        [Required]
-        public bool isManager;
+        public string User { get; set; }
+        //The following does not work
+        //[Required]
+        //public bool isManager { get; set; }
     }
 
 
