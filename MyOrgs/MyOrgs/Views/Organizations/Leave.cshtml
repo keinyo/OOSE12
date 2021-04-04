@@ -1,0 +1,16 @@
+﻿<!--Known issue: If the user is not a part of the org a blank page will-->
+@model MyOrgs.Models.OrgMembership
+
+@{
+    ViewData["Title"] = "Leave";
+}
+
+<h1>Leave</h1>
+<p>Are you sure you want to leave this organization?</p>
+
+<form asp-action="Leave">
+    <input type="hidden" asp-for="Org" />
+    <input type="submit" value="Leave" class="btn btn-danger" /> |
+    <a asp-action="Index">Back to List</a>
+</form>
+

@@ -8,20 +8,22 @@
 <h1>Join</h1>
 
 <h4>Organization</h4>
+<!--TODO: have name in place of Org Id-->
+<!--TODO: have a message saying user is already part of said organization and 
+    disable join button if user tries to join an org they are already a part of-->
+<p>Are you sure you want to join the organization with the id @ViewBag.OrgID?</p>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Join">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="d-none"></div>
             <div class="form-group">
-                <label asp-for="User"></label>
-                <input asp-for="User" class="text" value="@User.Identity.Name" />
-                <span asp-validation-for="User" class="text-danger"></span>
+                <input asp-for="User" class="d-none" value="@User.Identity.Name" />
+                <span asp-validation-for="User" class="d-none"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Org"></label>
-                <input asp-for="Org" class="text" value="@ViewBag.OrgID" />
-                <span asp-validation-for="Org" class="text-danger"></span>
+                <input asp-for="Org" class="d-none" value="@ViewBag.OrgID" />
+                <span asp-validation-for="Org" class="d-none"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Join" class="btn btn-primary" />

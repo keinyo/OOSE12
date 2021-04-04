@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using MyOrgs.Data;
 using MyOrgs.Models;
 
@@ -126,7 +127,7 @@ namespace MyOrgs.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            
+
             return View(organization);
         }
 
@@ -149,7 +150,7 @@ namespace MyOrgs.Controllers
             return View(organization);
         }
 
-    
+
 
         // POST: Organizations/Delete/5
         [HttpPost, ActionName("Delete")]
@@ -168,7 +169,7 @@ namespace MyOrgs.Controllers
         public async Task<IActionResult> Join(int? id)
         {
             ViewBag.OrgID = id;
-            if(id==null)
+            if (id == null)
             {
                 return NotFound();
             }
@@ -192,9 +193,53 @@ namespace MyOrgs.Controllers
             {
                 _context.Add(orgMembership);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(JoinConfirmation));
             }
             return View(orgMembership);
+        }
+
+        //GET: Organizations/Leave/5
+        [Authorize]
+        public async Task<IActionResult> Leave(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var orgMembership = await _context.OrgMembership
+                .FirstOrDefaultAsync(m => (m.Org == id && m.User == User.Identity.Name));
+            if (orgMembership == null)
+            {
+                return NotFound();
+            }
+
+            return View(orgMembership);
+        }
+
+        //GET: Organizations/JoinConfirmation
+        [Authorize]
+        public IActionResult JoinConfirmation()
+        {
+            return View();
+        }
+
+        //GET: Organizations/LeaveConfirmed
+        [HttpPost, ActionName("Leave")]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> LeaveConfirmed(int id)
+        {
+            var orgMembership = await _context.OrgMembership.FindAsync(id, User.Identity.Name);
+            _context.OrgMembership.Remove(orgMembership);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(LeaveConfirmation));
+        }
+
+        //GET: Organizations/LeaveConfirmation
+        public IActionResult LeaveConfirmation()
+        {
+            return View();
         }
 
         private bool OrganizationExists(int id)
