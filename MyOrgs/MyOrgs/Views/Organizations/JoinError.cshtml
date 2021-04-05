@@ -1,0 +1,16 @@
+﻿<!--Source used: https://www.c-sharpcorner.com/blogs/redirect-to-another-page-after-5-seconds-delay-using-javascript-->
+@{
+    ViewData["Title"] = "Join Error";
+}
+<font size="+3">
+<p>If you are seeing this page, you probably tried to join an orgainzation you are already a part of...</p>
+
+<a asp-action="Index">Click here to return to the list of organizations if you are not redirected after 5 seconds...</a>
+</font>
+
+<!--Source used: https://www.tutorialspoint.com/How-to-use-JavaScript-to-redirect-a-webpage-after-5-seconds-->
+<script>
+    setTimeout(function () {
+        window.location.href = "index"
+    }, 5000);
+</script>

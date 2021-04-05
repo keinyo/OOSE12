@@ -2,8 +2,15 @@
 @{
     ViewData["Title"] = "LeaveConfirmation";
 }
+<font size="+3">
+    <h1>Succefully left organization</h1>
 
-<h1>Succefully left organization</h1>
+    <a asp-action="Index">Click here to return to the list of organizations if you are not redirected after 5 seconds...</a>
+</font>
 
-<a asp-action="Index">Click here to go back to the list of organizations</a>
-
+<!--Source used: https://www.tutorialspoint.com/How-to-use-JavaScript-to-redirect-a-webpage-after-5-seconds-->
+<script>
+    setTimeout(function () {
+        window.location.href = "index"
+    }, 5000);
+</script>

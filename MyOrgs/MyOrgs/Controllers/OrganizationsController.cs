@@ -191,9 +191,16 @@ namespace MyOrgs.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(orgMembership);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(JoinConfirmation));
+                try
+                {
+                    _context.Add(orgMembership);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(JoinConfirmation));
+                }
+                catch(Exception)
+                {
+                    return RedirectToAction(nameof(JoinError));
+                }
             }
             return View(orgMembership);
         }
@@ -211,7 +218,7 @@ namespace MyOrgs.Controllers
                 .FirstOrDefaultAsync(m => (m.Org == id && m.User == User.Identity.Name));
             if (orgMembership == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(LeaveError));
             }
 
             return View(orgMembership);
@@ -234,6 +241,18 @@ namespace MyOrgs.Controllers
             _context.OrgMembership.Remove(orgMembership);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(LeaveConfirmation));
+        }
+
+        //GET: Organizations/LeaveError
+        public IActionResult LeaveError()
+        {
+            return View();
+        }
+
+        //GET: Organizations/LeaveError
+        public IActionResult JoinError()
+        {
+            return View();
         }
 
         //GET: Organizations/LeaveConfirmation
