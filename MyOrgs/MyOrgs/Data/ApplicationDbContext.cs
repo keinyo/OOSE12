@@ -23,7 +23,8 @@ namespace MyOrgs.Data
             base.OnModelCreating(modelbuilder);
             modelbuilder.Entity<OrgMembership>()
                 .HasKey(o => new { o.Org, o.User });
-        }
-    }
 
+        }
+
+    }
 }

@@ -17,6 +17,8 @@ using MyOrgs.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MyOrgs.Hubs;
+
 
 namespace MyOrgs
 {
@@ -39,10 +41,11 @@ namespace MyOrgs
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddSignalR();
 
 
-//            services.AddDbContext<AnnouncementContext>(options =>
-//                options.UseSqlServer(Configuration.GetConnectionString("AnnouncementContext")));
+            //            services.AddDbContext<AnnouncementContext>(options =>
+            //                options.UseSqlServer(Configuration.GetConnectionString("AnnouncementContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,6 +75,7 @@ namespace MyOrgs
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+                endpoints.MapHub<ChatHub>("/chatHub");
             });
         }
     }
