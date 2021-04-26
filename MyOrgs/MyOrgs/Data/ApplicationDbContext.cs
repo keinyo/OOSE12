@@ -26,5 +26,7 @@ namespace MyOrgs.Data
 
         }
 
+        public DbSet<MyOrgs.Models.TaskList> TaskList { get; set; }
+
     }
 }
